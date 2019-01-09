@@ -1,4 +1,4 @@
-/*
+﻿/*
  *    The contents of this file are subject to the Initial
  *    Developer's Public License Version 1.0 (the "License");
  *    you may not use this file except in compliance with the
@@ -401,7 +401,14 @@ namespace FirebirdSql.Data.FirebirdClient
 			}
 			if (!string.IsNullOrEmpty(options.UserID))
 			{
-				dpb.Append(IscCodes.isc_dpb_user_name, options.UserID);
+				if (options.ServerType == FbServerType.Embedded)
+				{
+					dpb.Append(IscCodes.isc_dpb_trusted_auth, options.UserID);
+				}
+				else
+				{
+					dpb.Append(IscCodes.isc_dpb_user_name, options.UserID);
+				}
 			}
 			if (!string.IsNullOrEmpty(options.Role))
 			{
