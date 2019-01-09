@@ -1,4 +1,4 @@
-﻿/*
+/*
  *    The contents of this file are subject to the Initial
  *    Developer's Public License Version 1.0 (the "License");
  *    you may not use this file except in compliance with the
@@ -151,7 +151,7 @@ namespace FirebirdSql.Data.FirebirdClient
 
 				var dpb = BuildDpb(_db, _options);
 
-				if (string.IsNullOrEmpty(_options.UserID) && string.IsNullOrEmpty(_options.Password))
+				if (string.IsNullOrEmpty(_options.UserID) && string.IsNullOrEmpty(_options.Password) && (_options.ServerType != FbServerType.Embedded))
 				{
 					_db.AttachWithTrustedAuth(dpb, _options.DataSource, _options.Port, _options.Database, _options.CryptKey);
 				}
