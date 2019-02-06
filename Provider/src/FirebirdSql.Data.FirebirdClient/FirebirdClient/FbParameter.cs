@@ -169,7 +169,14 @@ namespace FirebirdSql.Data.FirebirdClient
 					throw new InvalidOperationException("Incorrect Guid value.");
 				}
 
-				_value = value;
+				if (FbDbType == FbDbType.Guid && value is byte[])
+				{
+					_value = new Guid(value as byte[]);
+				}
+				else
+				{
+					_value = value;
+				}
 
 				if (!IsTypeSet)
 				{
